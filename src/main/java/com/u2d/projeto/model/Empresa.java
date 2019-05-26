@@ -3,6 +3,7 @@ package com.u2d.projeto.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,14 +14,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Tolerate;
+
+@Getter
+@Setter
+@Builder
 @Entity
-@Table(name = "TB001_EMPRESA")
+@Table(name = "TB003_EMPRESA")
 public class Empresa implements Serializable{
 
 	private static final long serialVersionUID = -2059101010501651601L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
 	@Column(name = "CO_EMPRESA")
 	private Long id;
 	
@@ -70,10 +80,13 @@ public class Empresa implements Serializable{
 	private String tipoEmpresa;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ENDERECO_COD")
+	@JoinColumn(name = "ENDERECO_CO")
 	private Endereco endereco;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CONTATO_COD")
+	@JoinColumn(name = "CONTATO_CO")
 	private Contato contato;
+	
+	@Tolerate
+	public Empresa() {}
 }
