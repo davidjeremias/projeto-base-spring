@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -30,18 +32,25 @@ public class Contato implements Serializable{
 	@Column(name = "CO_CONTATO")
 	private Long id;
 	
+	@NotNull
+	@Size(max=11)
 	@Column(name = "CO_CPF")
 	private String cpf;
 	
+	@NotNull
+	@Size(max=100)
 	@Column(name = "NO_NOME")
 	private String nomeContato;
 	
+	@Size(max=11)
 	@Column(name = "NU_TELEFONE_MOVEL")
 	private String telefoneMovel;
 	
+	@Size(max=11)
 	@Column(name = "NU_TELEFONE_FIXO")
 	private String telefoneFixo;
 	
+	@Size(max=100)
 	@Column(name = "NO_EMAIL")
 	private String email;
 	

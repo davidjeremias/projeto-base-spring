@@ -2,7 +2,11 @@ package com.u2d.projeto.resource;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.u2d.projeto.event.RecursoCriadoEvent;
 import com.u2d.projeto.model.Empresa;
 import com.u2d.projeto.service.EmpresaService;
 
@@ -25,6 +30,9 @@ public class EmpresaResource {
 	
 	@Autowired
 	private EmpresaService service;
+	
+	@Autowired
+	private ApplicationEventPublisher publishe;
 	
 	@GetMapping
 	public ResponseEntity<?> findAll(){
@@ -41,9 +49,10 @@ public class EmpresaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Empresa> save(@RequestBody Empresa empresa){
+	public ResponseEntity<Empresa> save(@Valid @RequestBody Empresa empresa, HttpServletResponse response){
 		Empresa empresaSalva = service.save(empresa);
-		return empresaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).body(empresaSalva) 
+		publishe.publishEvent(new RecursoCriadoEvent(this, response, empresaSalva.getId()));
+		return empresaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).body(empresaSalva)
 				: ResponseEntity.noContent().build();
 	}
 	
