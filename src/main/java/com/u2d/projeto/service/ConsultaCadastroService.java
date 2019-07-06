@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.u2d.projeto.config.ConfiguracaoNFE;
 
-import br.com.swconsultoria.certificado.exception.CertificadoException;
-import br.com.swconsultoria.nfe.Nfe;
-import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
-import br.com.swconsultoria.nfe.dom.enuns.EstadosEnum;
-import br.com.swconsultoria.nfe.dom.enuns.PessoaEnum;
-import br.com.swconsultoria.nfe.exception.NfeException;
-import br.com.swconsultoria.nfe.schema.retConsCad.TRetConsCad;
+import br.com.u2d.certificado.exception.CertificadoException;
+import br.com.u2d.nfe.Nfe;
+import br.com.u2d.nfe.dom.ConfiguracoesNfe;
+import br.com.u2d.nfe.dom.enuns.EstadosEnum;
+import br.com.u2d.nfe.dom.enuns.PessoaEnum;
+import br.com.u2d.nfe.exception.NfeException;
+import br.com.u2d.nfe.schema.retConsCad.TRetConsCad;
 
 @Service
 public class ConsultaCadastroService {

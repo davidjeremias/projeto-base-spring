@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.u2d.projeto.service.ConsultaCadastroService;
 import com.u2d.projeto.service.StatusSefazService;
 
-import br.com.swconsultoria.certificado.exception.CertificadoException;
-import br.com.swconsultoria.nfe.exception.NfeException;
-import br.com.swconsultoria.nfe.schema.retConsCad.TRetConsCad;
-import br.com.swconsultoria.nfe.schema_4.retConsStatServ.TRetConsStatServ;
+import br.com.u2d.certificado.exception.CertificadoException;
+import br.com.u2d.nfe.exception.NfeException;
+import br.com.u2d.nfe.schema.retConsCad.TRetConsCad;
+import br.com.u2d.nfe.schema_4.retConsStatServ.TRetConsStatServ;
 
 @RestController
 @RequestMapping("/consultaSefaz")

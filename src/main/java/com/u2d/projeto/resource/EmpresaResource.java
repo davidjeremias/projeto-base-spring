@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.u2d.projeto.auditoria.AuditoriaInterface;
+import com.u2d.projeto.auditoria.TipoEventoAuditoriaEnum;
 import com.u2d.projeto.event.RecursoCriadoEvent;
 import com.u2d.projeto.model.Empresa;
 import com.u2d.projeto.service.EmpresaService;
@@ -48,6 +50,7 @@ public class EmpresaResource {
 				: ResponseEntity.noContent().build();
 	}
 	
+	@AuditoriaInterface(funcionalidade="Cadastro Empresa", evento=TipoEventoAuditoriaEnum.INSERCAO)
 	@PostMapping
 	public ResponseEntity<Empresa> save(@Valid @RequestBody Empresa empresa, HttpServletResponse response){
 		Empresa empresaSalva = service.save(empresa);

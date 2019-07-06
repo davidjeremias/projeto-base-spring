@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.swconsultoria.certificado.Certificado;
-import br.com.swconsultoria.certificado.exception.CertificadoException;
-import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
-import br.com.swconsultoria.nfe.dom.enuns.AmbienteEnum;
-import br.com.swconsultoria.nfe.dom.enuns.EstadosEnum;
+import br.com.u2d.certificado.Certificado;
+import br.com.u2d.certificado.exception.CertificadoException;
+import br.com.u2d.nfe.dom.ConfiguracoesNfe;
+import br.com.u2d.nfe.dom.enuns.AmbienteEnum;
+import br.com.u2d.nfe.dom.enuns.EstadosEnum;
 
 @Component
 public class ConfiguracaoNFE {
