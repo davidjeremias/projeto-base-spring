@@ -1,5 +1,6 @@
 package com.u2d.projeto.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.u2d.projeto.model.Empresa;
 import com.u2d.projeto.repository.EmpresaRepository;
+import com.u2d.projeto.util.ZipArchive;
 
 @Service
 public class EmpresaService {
@@ -16,6 +18,7 @@ public class EmpresaService {
 	private EmpresaRepository repository;
 
 	public List<Empresa> findAll() {
+		zipa();
 		return repository.findAll();
 	}
 
@@ -41,6 +44,11 @@ public class EmpresaService {
 		Empresa empresaSalva = findById(codigo);
 		if(empresaSalva != null)
 			repository.delete(empresaSalva);
+	}
+	
+	public void zipa() {
+		File arq = new File("/opt/teste.zip");
+		ZipArchive.zipaArquivo(arq);
 	}
 
 }
