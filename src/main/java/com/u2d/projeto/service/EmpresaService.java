@@ -16,12 +16,8 @@ public class EmpresaService {
 	
 	@Autowired
 	private EmpresaRepository repository;
-	
-	@Autowired
-	private EmailService emailService;
 
 	public List<Empresa> findAll() {
-		emailService.sendSimpleMessage();
 		return repository.findAll();
 	}
 

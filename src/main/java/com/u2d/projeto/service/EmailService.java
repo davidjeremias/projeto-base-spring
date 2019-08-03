@@ -13,9 +13,9 @@ public class EmailService {
 
 	public void sendSimpleMessage() {
 		SimpleMailMessage message = new SimpleMailMessage(); 
-		message.setTo("com1.com3@gmail.com"); 
-		message.setSubject("EMAIL TESTE"); 
-		message.setText("TESTANDO ENVIO DE EMAIL");
+		message.setTo("com1.com3@gmail.com","ubarreto21@gmail.com", "df.jorge@gmail.com"); 
+		message.setSubject("EMAIL TESTE");
+		message.setText("TESTANDO ENVIO DE EMAIL! TUDO COM DEDO NO CÚ MENOS EU!!!");
 		emailSender.send(message);
 	}
 }
