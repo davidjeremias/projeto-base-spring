@@ -27,7 +27,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.secret("u2d")
 		.scopes("read", "write")
 		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(30)
+		.accessTokenValiditySeconds(3600)
 		.refreshTokenValiditySeconds(3600 * 24);
 	}
 	
