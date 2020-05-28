@@ -12,16 +12,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Tolerate;
 
-@Getter
-@Setter
-@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Builder
-@Table(name = "TB001_CONTATO")
+@Entity
+@Table(name = "TB003_CONTATO")
 public class Contato implements Serializable{
 
 	private static final long serialVersionUID = -5638331205488770864L;
@@ -53,8 +53,4 @@ public class Contato implements Serializable{
 	@Size(max=100)
 	@Column(name = "NO_EMAIL")
 	private String email;
-	
-	@Tolerate
-	public Contato() {
-	}
 }

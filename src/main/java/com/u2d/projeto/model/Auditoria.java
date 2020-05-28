@@ -13,13 +13,13 @@ import javax.persistence.Table;
 
 import com.u2d.projeto.auditoria.TipoEventoAuditoriaEnum;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Tolerate;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Builder
 @Entity
 @Table(name = "TB004_AUDITORIA")
@@ -47,8 +47,4 @@ public class Auditoria implements Serializable{
 	
 	@Column(name = "NU_HOSTNAME")
 	private String hostname;
-	
-	@Tolerate
-	public Auditoria() {}
-
 }

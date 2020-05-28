@@ -12,13 +12,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Tolerate;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Builder
 @Entity
 @Table(name = "TB002_ENDERECO")
@@ -65,7 +65,4 @@ public class Endereco implements Serializable{
 	@Size(max=20)
 	@Column(name = "CO_IBGE")
 	private String codigoIBGE;
-	
-	@Tolerate
-	public Endereco() {}
 }

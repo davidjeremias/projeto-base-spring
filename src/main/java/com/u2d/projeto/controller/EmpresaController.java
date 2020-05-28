@@ -1,4 +1,4 @@
-package com.u2d.projeto.resource;
+package com.u2d.projeto.controller;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ import com.u2d.projeto.service.EmpresaService;
 @RestController
 @RequestMapping("/empresa")
 @CrossOrigin("*")
-public class EmpresaResource {
+public class EmpresaController {
 	
 	@Autowired
 	private EmpresaService service;

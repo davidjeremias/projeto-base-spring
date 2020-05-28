@@ -16,16 +16,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Tolerate;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "TB003_EMPRESA")
+@Table(name = "TB005_EMPRESA")
 public class Empresa implements Serializable{
 
 	private static final long serialVersionUID = -2059101010501651601L;
@@ -106,7 +106,4 @@ public class Empresa implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "CONTATO_CO")
 	private Contato contato;
-	
-	@Tolerate
-	public Empresa() {}
 }

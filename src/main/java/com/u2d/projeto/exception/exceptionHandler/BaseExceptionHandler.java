@@ -1,4 +1,4 @@
-package com.u2d.projeto.exceptionHandler;
+package com.u2d.projeto.exception.exceptionHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
