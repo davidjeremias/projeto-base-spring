@@ -12,8 +12,8 @@ public class PageableUtil {
     private static final String SIZE = "size";
 
     public static Pageable getPageableParans(Map<String, String[]> params, Sort.Direction direction, String orderBy) {
-        int page = Integer.parseInt(RequisicaoUtil.extrairParametro(params, PAGE));
-        int size = Integer.parseInt(RequisicaoUtil.extrairParametro(params, SIZE));
+        int page = Integer.parseInt(RequestUtil.extrairParametro(params, PAGE));
+        int size = Integer.parseInt(RequestUtil.extrairParametro(params, SIZE));
         return PageRequest.of(page, size, direction, orderBy);
     }
 }
