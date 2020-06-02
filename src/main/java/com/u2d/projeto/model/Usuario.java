@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,4 +30,15 @@ public class Usuario implements Serializable {
 
     @Column(name = "DES_EMAIL")
     private String email;
+
+    @Column(name = "CO_SENHA")
+    private String senha;
+
+    @OneToOne
+    @JoinColumn(name = "EMPRESA_CO")
+    private Empresa empresa;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USUARIO_PERMISSAO", joinColumns = @JoinColumn(name = "USUARIO_CO"), inverseJoinColumns = @JoinColumn(name = "PERMISSAO_CO") )
+    private List<Permissao> permissoes;
 }

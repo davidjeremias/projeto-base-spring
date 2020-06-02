@@ -28,7 +28,7 @@ public class UsuarioService {
     }
 
     private void validaDuplicidadeCPF(UsuarioDTO usuarioDTO) throws NegocioException {
-        Usuario user = repository.findByCpf(usuarioDTO.getCpf());
+        Optional<Usuario> user = repository.findByCpf(usuarioDTO.getCpf());
         if(user != null){
             throw new NegocioException("Usuario já cadastrado com esse cpf");
         }

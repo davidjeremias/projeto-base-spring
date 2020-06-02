@@ -44,10 +44,4 @@ public class EmpresaService {
 		if(empresaSalva != null)
 			repository.delete(empresaSalva);
 	}
-	
-	public void zipa() {
-		File arq = new File("/opt/teste.zip");
-		ZipArchive.zipaArquivo(arq);
-	}
-
 }

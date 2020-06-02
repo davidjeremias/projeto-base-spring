@@ -2,6 +2,7 @@ package com.u2d.projeto.config.token;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -26,7 +27,7 @@ public class RefreshTokenPreProcessorFilter implements Filter{
 			throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
-		
+		System.out.println(req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 		if("/oauth/token".equalsIgnoreCase(req.getRequestURI())
 				&& "refresh_token".equals(req.getParameter("grant_type"))
 				&& req.getCookies() != null) {
