@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import com.u2d.projeto.model.Endereco;
 
 @Eager
-@Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 }

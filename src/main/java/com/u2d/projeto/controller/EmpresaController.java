@@ -1,10 +1,12 @@
 package com.u2d.projeto.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.u2d.projeto.dto.EmpresaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,7 @@ import com.u2d.projeto.auditoria.TipoEventoAuditoriaEnum;
 import com.u2d.projeto.event.RecursoCriadoEvent;
 import com.u2d.projeto.model.Empresa;
 import com.u2d.projeto.service.EmpresaService;
+import org.springframework.web.context.request.WebRequest;
 
 @RestController
 @RequestMapping("/empresa")
@@ -49,13 +52,20 @@ public class EmpresaController {
 		return empresaSalva != null ? ResponseEntity.status(HttpStatus.OK).body(empresaSalva)
 				: ResponseEntity.noContent().build();
 	}
+
+	@GetMapping("/buscaPorCnpjReceita")
+	public ResponseEntity<EmpresaDTO> findByCnpjReceita(WebRequest request){
+		Optional<EmpresaDTO> empresaRetorno = service.findByCnpjReceita(request.getParameterMap());
+		return empresaRetorno.isPresent()  ? ResponseEntity.status(HttpStatus.OK).body(empresaRetorno.get())
+				: ResponseEntity.noContent().build();
+	}
 	
 	@AuditoriaInterface(funcionalidade="Cadastro Empresa", evento=TipoEventoAuditoriaEnum.INSERCAO)
 	@PostMapping
-	public ResponseEntity<Empresa> save(@Valid @RequestBody Empresa empresa, HttpServletResponse response){
-		Empresa empresaSalva = service.save(empresa);
-		publishe.publishEvent(new RecursoCriadoEvent(this, response, empresaSalva.getId()));
-		return empresaSalva != null ? ResponseEntity.status(HttpStatus.CREATED).body(empresaSalva)
+	public ResponseEntity<EmpresaDTO> save(@Valid @RequestBody EmpresaDTO empresaDTO, HttpServletResponse response){
+		Optional<EmpresaDTO> empresaSalva = service.save(empresaDTO);
+		publishe.publishEvent(new RecursoCriadoEvent(this, response, empresaSalva.get().getId()));
+		return empresaSalva.isPresent() ? ResponseEntity.status(HttpStatus.CREATED).body(empresaSalva.get())
 				: ResponseEntity.noContent().build();
 	}
 	

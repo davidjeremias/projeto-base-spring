@@ -3,7 +3,6 @@ package com.u2d.projeto.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,23 +13,23 @@ import javax.persistence.Table;
 import com.u2d.projeto.auditoria.TipoEventoAuditoriaEnum;
 
 import lombok.*;
-import lombok.experimental.Tolerate;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @Entity
-@Table(name = "TB004_AUDITORIA")
+@Table(name = "TB008_AUDITORIA")
 public class Auditoria implements Serializable{
 
 	private static final long serialVersionUID = -8050294797646306364L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
 	@Column(name = "CO_AUDITORIA")
+	@EqualsAndHashCode.Include
 	private Long id;
 	
 	@Column(name = "NO_FUNCIONALIDADE")

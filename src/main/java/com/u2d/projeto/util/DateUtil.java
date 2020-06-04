@@ -15,4 +15,9 @@ public class DateUtil {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return localDate.format(formatter);
     }
+
+    public static LocalDate stringFormatBrasilToLocalDate(String data){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(data, formatter);
+    }
 }

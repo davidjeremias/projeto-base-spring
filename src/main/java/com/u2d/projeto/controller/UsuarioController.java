@@ -20,7 +20,7 @@ public class UsuarioController {
     private UsuarioService service;
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> save(@Valid @RequestBody UsuarioDTO usuarioDTO) throws NegocioException, NegocioException {
+    public ResponseEntity<UsuarioDTO> save(@Valid @RequestBody UsuarioDTO usuarioDTO) throws NegocioException {
         UsuarioDTO retorno = service.save(usuarioDTO);
         return new ResponseEntity<>(retorno, HttpStatus.CREATED);
     }

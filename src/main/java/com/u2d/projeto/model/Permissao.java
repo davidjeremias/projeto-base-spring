@@ -5,10 +5,11 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @Entity
 @Table(name ="TB006_PERMISSAO")
@@ -19,6 +20,7 @@ public class Permissao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CO_PERMISSAO")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "DE_PERMISSAO")

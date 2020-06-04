@@ -9,19 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.*;
-import lombok.experimental.Tolerate;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @Entity
-@Table(name = "TB003_CONTATO")
+@Table(name = "TB002_CONTATO")
 public class Contato implements Serializable{
 
 	private static final long serialVersionUID = -5638331205488770864L;
@@ -30,17 +29,8 @@ public class Contato implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "CO_CONTATO")
+	@EqualsAndHashCode.Include
 	private Long id;
-	
-	@NotNull
-	@Size(max=11)
-	@Column(name = "CO_CPF")
-	private String cpf;
-	
-	@NotNull
-	@Size(max=100)
-	@Column(name = "NO_NOME")
-	private String nomeContato;
 	
 	@Size(max=11)
 	@Column(name = "NU_TELEFONE_MOVEL")

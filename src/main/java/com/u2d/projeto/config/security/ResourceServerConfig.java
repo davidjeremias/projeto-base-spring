@@ -36,7 +36,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	public void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()//REQUER AUTORIZAÇÕES PARA REQUISIÇÕES
-		.anyRequest().authenticated() //PARA FAZER QUALQUER REQUISIÇÃO O CLIENT DEVE ESTAR AUTORIZADO
+		.anyRequest().permitAll() //PARA FAZER QUALQUER REQUISIÇÃO O CLIENT DEVE ESTAR AUTORIZADO
 		.and()
 		//.httpBasic().and() //TIPO DE SEGURAÇA
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //A API NÃO GUARDA ESTADO DA SESSÃO

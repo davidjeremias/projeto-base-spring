@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import com.u2d.projeto.model.Empresa;
 
 @Eager
-@Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
 }

@@ -6,13 +6,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @Entity
-@Table(name ="TB001_USUARIO")
+@Table(name ="TB005_USUARIO")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 3558747835610744963L;
@@ -20,6 +21,7 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CO_USUARIO")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @Column(name = "NO_NOME")
@@ -28,7 +30,7 @@ public class Usuario implements Serializable {
     @Column(name = "NU_CPF", unique = true)
     private String cpf;
 
-    @Column(name = "DES_EMAIL")
+    @Column(name = "DE_EMAIL")
     private String email;
 
     @Column(name = "CO_SENHA")
@@ -39,6 +41,6 @@ public class Usuario implements Serializable {
     private Empresa empresa;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USUARIO_PERMISSAO", joinColumns = @JoinColumn(name = "USUARIO_CO"), inverseJoinColumns = @JoinColumn(name = "PERMISSAO_CO") )
+    @JoinTable(name = "TB007_USUARIO_PERMISSAO", joinColumns = @JoinColumn(name = "USUARIO_CO"), inverseJoinColumns = @JoinColumn(name = "PERMISSAO_CO") )
     private List<Permissao> permissoes;
 }

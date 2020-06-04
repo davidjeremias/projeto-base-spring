@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import com.u2d.projeto.model.Contato;
 
 @Eager
-@Repository
 public interface ContatoRepository extends JpaRepository<Contato, Long>{
 }
