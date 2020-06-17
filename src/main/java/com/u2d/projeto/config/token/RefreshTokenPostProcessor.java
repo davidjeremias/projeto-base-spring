@@ -36,7 +36,7 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 		
 		String refreshToken = body.getRefreshToken().getValue();
 		
-		adicionarrefreshTokenNoCookie(refreshToken, req, res);
+		adicionarRefreshTokenNoCookie(refreshToken, req, res);
 		removeRefreshTokenDoBody(token);
 		
 		return body;
@@ -46,11 +46,12 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 		token.setRefreshToken(null);
 	}
 
-	private void adicionarrefreshTokenNoCookie(String refreshToken, HttpServletRequest req, HttpServletResponse res) {
+	private void adicionarRefreshTokenNoCookie(String refreshToken, HttpServletRequest req, HttpServletResponse res) {
 		Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+		refreshTokenCookie.setDomain("localhost");
 		refreshTokenCookie.setHttpOnly(true); // APENAS COOKIE DE HTTP
-		refreshTokenCookie.setSecure(false); // TODO: MUDAR PARA TRUE QUANDO FOR PRODUCAO
-		refreshTokenCookie.setPath(req.getContextPath()+ "/oauth/token"); //PATH QUE SERA CRIADO O COOKIE
+		refreshTokenCookie.setSecure(true); // TODO: MUDAR PARA TRUE QUANDO FOR PRODUCAO
+		refreshTokenCookie.setPath(req.getContextPath()); //PATH QUE SERA CRIADO O COOKIE
 		refreshTokenCookie.setMaxAge(2592000); // TEMPO DE VIDA DO COOKIE
 		res.addCookie(refreshTokenCookie);
 	}

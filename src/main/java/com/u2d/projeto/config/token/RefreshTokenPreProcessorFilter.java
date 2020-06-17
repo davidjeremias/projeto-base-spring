@@ -2,7 +2,6 @@ package com.u2d.projeto.config.token;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

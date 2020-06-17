@@ -12,6 +12,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+import com.u2d.projeto.config.security.util.PasswordUtil;
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
@@ -24,7 +26,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		clients
 		.inMemory()
 		.withClient("app-u2d-client")
-		.secret("u2d")
+		.secret(PasswordUtil.encoder("u2d"))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password", "refresh_token")
 		.accessTokenValiditySeconds(300)

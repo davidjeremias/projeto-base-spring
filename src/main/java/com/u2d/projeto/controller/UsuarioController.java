@@ -31,6 +31,13 @@ public class UsuarioController {
         return !listRetorno.isEmpty() && listRetorno != null ? new ResponseEntity<List<UsuarioDTO>>(listRetorno, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    
+    @GetMapping("{cpf}")
+    public ResponseEntity<UsuarioDTO> findByCpf(@PathVariable("cpf") String cpf){
+        UsuarioDTO retorno = service.findByCpf(cpf);
+        return retorno != null ? new ResponseEntity<UsuarioDTO>(retorno, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
