@@ -2,7 +2,7 @@
 server:
   servlet:
     context-path: /projeto-backend
-  port: 9080
+  port: 8080
 
 spring:
   application:
@@ -12,6 +12,7 @@ spring:
 
   #CONFIGURACAO DO BANCO POSTGRES
   jpa:
+    database: POSTGRESQL
     show-sql: true
     hibernate:
       ddl-auto: update
@@ -20,13 +21,17 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-  datasorce:
-    url: jdbc:postgresql://localhost:5432/projeto?createDatabaseIfNotExiste=true
+  datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/projeto
     username: postgres
     password: 415782
 
   #ATIVANDO MIGRACAO DO FLYWAY
-  flyway: baseline-on-migrate=true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 
   #NAO ACEITAR ATRIBUTOS DESCONHECIDOS PELA API
   jackson:
