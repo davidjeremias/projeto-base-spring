@@ -4,10 +4,6 @@ pipeline {
         IMAGEM_DOCKER = 'https://hub.docker.com/repository/docker/dvvdoficial'
     }
     
-    tools {
-        maven 'maven_3_6_0'
-    }
-    
     stages {
         stage('Git checkout') {
         	steps {
@@ -34,8 +30,19 @@ pipeline {
         }
         stage('Arquivar JAR') {
            steps {
-               archive 'target/checkmat-1.0.0-SNAPSHOT.jar'
+               archive 'target/projeto.jar'
            }
+        }
+        stage('Imagem Docker') {
+            steps {
+                echo "Versão do pom.xml: ${VERSAO_POM}"
+                withDockerRegistry([credentialsId: 'c34117dc-5fa1-46f8-8ebb-f1cf0b2254c4', url: 'https://dockerhub.camara.gov.br/']) {
+                    script {
+                        imagem = docker.build("${env.IMAGEM_DOCKER}:${VERSAO_POM}")
+                        imagem.push()
+                    }
+                }
+            }
         }
     }
 }
