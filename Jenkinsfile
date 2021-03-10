@@ -33,22 +33,5 @@ pipeline {
                archive 'target/projeto.jar'
            }
         }
-        stage('Imagem Docker') {
-            steps {
-                echo "Versão do pom.xml: ${VERSAO_POM}"
-                withDockerRegistry([credentialsId: 'c34117dc-5fa1-46f8-8ebb-f1cf0b2254c4', url: 'https://dockerhub.camara.gov.br/']) {
-                    script {
-                        imagem = docker.build("${env.IMAGEM_DOCKER}:${VERSAO_POM}")
-                        imagem.push()
-                    }
-                }
-            }
-        }
-
-        post {
-          always {
-            cleanWs()
-          }
-        }
     }
 }
