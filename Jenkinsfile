@@ -3,6 +3,10 @@ pipeline {
     environment {
         IMAGEM_DOCKER = 'https://hub.docker.com/repository/docker/dvvdoficial'
     }
+
+    tools {
+            maven '3.6.3'
+    }
     
     stages {
         stage('Git checkout') {
@@ -13,19 +17,10 @@ pipeline {
 	            	}
 	        }
         }
-        stage('Maven Compile stage') {
+        stage('Maven Build') {
            steps {
-               sh "mvn clean compile"
-           }
-        }
-        stage('Maven testing stage') {
-           steps {
-               sh "mvn test"
-           }
-        }
-        stage('Maven deployment stage') {
-           steps {
-               sh "mvn deploy"
+               sh "mvn -version"
+               sh "mvn clean install"
            }
         }
         stage('Arquivar JAR') {
