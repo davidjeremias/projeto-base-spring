@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     environment {
@@ -6,8 +5,6 @@ pipeline {
         CREDENTIAL_DOCKER = 'dockerhub'
         IMAGE_DOCKER = ''
         EMAIL_TO = 'com1.com3@gmail.com'
-        SUBJECT_CONTENT = '$ PROJECT_NAME - Build # $ BUILD_NUMBER - $ BUILD_STATUS!'
-        BODY_CONTENT = '$ {SCRIPT, template = "groovy-html.template" }'
     }
 
     tools {
@@ -60,11 +57,11 @@ pipeline {
     post {
         failure {
             mail bcc: '',
-            body: "${BODY_CONTENT}",
+            body: '${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}: \n Check console output at ${BUILD_URL} to view the results.',
             cc: '',
             from: '',
             replyTo: '',
-            subject: "${SUBJECT_CONTENT}",
+            subject: '${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}!',
             to: "${EMAIL_TO}"
         }
     }
