@@ -47,7 +47,7 @@ pipeline {
                }
            }
         }
-        stage('Deployment image DockerHub') {
+        stage('Remove Unused docker image') {
            steps {
                sh "docker rmi $REPOSITORY_DOCKER:$BUILD_NUMBER"
            }
