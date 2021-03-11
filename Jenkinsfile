@@ -57,11 +57,11 @@ pipeline {
     post {
         failure {
             mail bcc: '',
-            body: "${currentBuild.fullDisplayName} - Build #${env.BUILD_NUMBER} - ${env.BUILD_STATUS}: \n Check console output at ${env.BUILD_URL} to view the results.",
+            body: "${currentBuild.fullDisplayName} - Build #${env.BUILD_NUMBER} - ${currentBuild.result}: \n Check console output at ${env.BUILD_URL} to view the results.",
             cc: '',
             from: '',
             replyTo: '',
-            subject: "${currentBuild.fullDisplayName} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}!",
+            subject: "${currentBuild.fullDisplayName} - Build # ${env.BUILD_NUMBER} - ${currentBuild.result}!",
             to: "${EMAIL_TO}"
         }
     }
