@@ -65,11 +65,11 @@ pipeline {
     post {
         failure {
             mail bcc: '',
-            body: "${NAME_PROJECT} - Build # ${NUMBER_BUILD} - ${STATUS_BUILD}: \n Check console output at ${URL_BUILD} to view the results.",
+            body: '${NAME_PROJECT} - Build # ${NUMBER_BUILD} - ${STATUS_BUILD}: \n Check console output at ${URL_BUILD} to view the results.',
             cc: '',
             from: '',
             replyTo: '',
-            subject: "${NAME_PROJECT} - Build # ${NUMBER_BUILD} - ${STATUS_BUILD}!",
+            subject: '${NAME_PROJECT} - Build # ${NUMBER_BUILD} - ${STATUS_BUILD}!',
             to: "${EMAIL_TO}"
         }
     }
