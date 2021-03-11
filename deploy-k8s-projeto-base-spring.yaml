@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: projeto-base-spring-container
-          image: dvvdoficial/projeto-base-spring:21
+          image: dvvdoficial/projeto-base-spring:63
           ports:
             - containerPort: 8080
