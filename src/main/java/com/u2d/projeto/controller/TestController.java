@@ -13,6 +13,6 @@ public class TestController {
 
     @GetMapping
     public ResponseEntity<?> findMsg(){
-        return ResponseEntity.ok("Teste funcional da api V2");
+        return ResponseEntity.ok("Teste funcional da api V3");
     }
 }
