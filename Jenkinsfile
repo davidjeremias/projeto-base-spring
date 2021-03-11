@@ -34,7 +34,7 @@ pipeline {
         stage('Building image Docker') {
            steps {
                script {
-                   IMAGE_DOCKER = docker.build REPOSITORY_DOCKER
+                   IMAGE_DOCKER = docker.build REPOSITORY_DOCKER + ":$BUILD_NUMBER"
                }
            }
         }
@@ -49,7 +49,7 @@ pipeline {
         }
         stage('Remove Unused docker image') {
            steps {
-               sh "docker rmi $REPOSITORY_DOCKER"
+               sh "docker rmi $REPOSITORY_DOCKER:$BUILD_NUMBER"
            }
         }
     }
