@@ -57,11 +57,11 @@ pipeline {
     post {
         failure {
             mail bcc: '',
-            body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Check console output at $BUILD_URL to view the results.',
+            body: "Something is wrong with ${env.BUILD_URL}",
             cc: '',
             from: '',
             replyTo: '',
-            subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
+            subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
             to: "${EMAIL_TO}"
         }
     }
