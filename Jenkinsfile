@@ -5,6 +5,7 @@ pipeline {
         CREDENTIAL_DOCKER = 'dockerhub'
         IMAGE_DOCKER = ''
         EMAIL_TO = 'com1.com3@gmail.com'
+        NUMBER_BUILD = $BUILD_NUMBER
     }
 
     tools {
@@ -57,7 +58,7 @@ pipeline {
     post {
         failure {
             mail bcc: '',
-            body: '${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}: \n Check console output at ${BUILD_URL} to view the results.',
+            body: '${PROJECT_NAME} - Build # ${NUMBER_BUILD} - ${BUILD_STATUS}: \n Check console output at ${BUILD_URL} to view the results.',
             cc: '',
             from: '',
             replyTo: '',
