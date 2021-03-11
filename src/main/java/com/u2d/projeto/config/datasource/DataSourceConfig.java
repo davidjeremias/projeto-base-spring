@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile("prod")
+@Profile("prd")
 public class DataSourceConfig {
 
     @Value("${spring.datasource.driverClassName}")
