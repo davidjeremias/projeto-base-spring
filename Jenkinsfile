@@ -5,7 +5,7 @@ pipeline {
         CREDENTIAL_DOCKER = 'dockerhub'
         IMAGE_DOCKER = ''
         EMAIL_TO = 'com1.com3@gmail.com'
-        NUMBER_BUILD = $BUILD_NUMBER
+        NUMBER_BUILD = ''$BUILD_NUMBER'
     }
 
     tools {
