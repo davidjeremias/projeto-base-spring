@@ -69,7 +69,7 @@ pipeline {
         cc: '',
         from: '',
         replyTo: '',
-        subject: '${NAME_PROJECT} - Build # ${NUMBER_BUILD} - ${STATUS_BUILD}!",
+        subject: '${NAME_PROJECT} - Build # ${NUMBER_BUILD} - ${STATUS_BUILD}!',
         to: "${EMAIL_TO}"
         throw e
     }
