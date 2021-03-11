@@ -56,13 +56,10 @@ pipeline {
     }
     post {
         failure {
-            mail bcc: '',
-            body: "${PROJECT_NAME} - Build # $BUILD_NUMBER - ${currentBuild.currentResult}: \n Check console output at $BUILD_URL to view the results.",
-            cc: '',
-            from: '',
-            replyTo: '',
-            subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
-            to: "${EMAIL_TO}"
+            emailext
+                body: "$ {DEFAULT_CONTENT}",
+                receiverProviders: [[$ class: 'DevelopersRecipientProvider'], [$ class: 'RequesterRecipientProvider']],
+                subject: "$ {DEFAULT_SUBJECT}"
         }
     }
 }
