@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-        IMAGEM_DOCKER = 'https://hub.docker.com/repository/docker/dvvdoficial'
+        IMAGEM_DOCKER = 'dvvdoficial/projeto-base-spring'
+        CREDENTIAL_DOCKER = 'dockerhub'
     }
 
     tools {
@@ -27,6 +28,13 @@ pipeline {
         stage('Arquivar JAR') {
            steps {
                archive 'target/projeto.jar'
+           }
+        }
+        stage('Building image Docker') {
+           steps {
+               script {
+                   docker.build IMAGEM_DOCKER + ":$BUILD_NUMBER"
+               }
            }
         }
     }
