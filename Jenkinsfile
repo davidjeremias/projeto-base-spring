@@ -57,9 +57,9 @@ pipeline {
     post {
         failure {
             emailext
-                body: "${DEFAULT_CONTENT}",
+                body: '${DEFAULT_CONTENT}',
                 receiverProviders: [[$ class: 'DevelopersRecipientProvider'], [$ class: 'RequesterRecipientProvider']],
-                subject: "${DEFAULT_SUBJECT}"
+                subject: '${DEFAULT_SUBJECT}'
         }
     }
 }
