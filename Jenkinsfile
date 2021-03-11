@@ -1,8 +1,9 @@
 pipeline {
     agent any
     environment {
-        IMAGEM_DOCKER = 'dvvdoficial/projeto-base-spring'
+        REPOSITORY_DOCKER = 'dvvdoficial/projeto-base-spring'
         CREDENTIAL_DOCKER = 'dockerhub'
+        IMAGE_DOCKER = ''
     }
 
     tools {
@@ -33,8 +34,22 @@ pipeline {
         stage('Building image Docker') {
            steps {
                script {
-                   docker.build IMAGEM_DOCKER + ":$BUILD_NUMBER"
+                   IMAGE_DOCKER = docker.build REPOSITORY_DOCKER + ":$BUILD_NUMBER"
                }
+           }
+        }
+        stage('Deployment image DockerHub') {
+           steps {
+               script {
+                   docker.withRegistry('', CREDENTIAL_DOCKER) {
+                    IMAGE_DOCKER.push()
+                   }
+               }
+           }
+        }
+        stage('Deployment image DockerHub') {
+           steps {
+               sh "docker rmi $REPOSITORY_DOCKER:$BUILD_NUMBER"
            }
         }
     }
