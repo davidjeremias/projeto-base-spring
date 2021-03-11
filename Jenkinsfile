@@ -5,10 +5,10 @@ pipeline {
         CREDENTIAL_DOCKER = 'dockerhub'
         IMAGE_DOCKER = ''
         EMAIL_TO = 'com1.com3@gmail.com'
-        NUMBER_BUILD = '$BUILD_NUMBER'
-        NAME_PROJECT = '$PROJECT_NAME'
-        STATUS_BUILD = '$BUILD_STATUS'
-        URL_BUILD = '$BUILD_URL'
+        NUMBER_BUILD = ''
+        NAME_PROJECT = ''
+        STATUS_BUILD = ''
+        URL_BUILD = ''
     }
 
     tools {
@@ -22,6 +22,10 @@ pipeline {
 	            checkout scm
 	            	script {
 	            	    VERSAO_POM = readMavenPom().getVersion()
+	            	    NUMBER_BUILD = $BUILD_NUMBER
+                        NAME_PROJECT = $PROJECT_NAME
+                        STATUS_BUILD = $BUILD_STATUS
+                        URL_BUILD = $BUILD_URL
 	            	}
 	        }
         }
