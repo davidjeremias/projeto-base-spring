@@ -57,7 +57,7 @@ pipeline {
     post {
         failure {
             mail bcc: '',
-            body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Check console output at $BUILD_URL to view the results.',
+            body: '${env.JOB_NAME} - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Check console output at $BUILD_URL to view the results.',
             cc: '',
             from: '',
             replyTo: '',
