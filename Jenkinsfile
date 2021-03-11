@@ -4,6 +4,7 @@ pipeline {
         REPOSITORY_DOCKER = 'dvvdoficial/projeto-base-spring'
         CREDENTIAL_DOCKER = 'dockerhub'
         IMAGE_DOCKER = ''
+        EMAIL_TO = 'com1.com3@gmail.com'
     }
 
     tools {
@@ -51,6 +52,24 @@ pipeline {
            steps {
                sh "docker rmi $REPOSITORY_DOCKER:$BUILD_NUMBER"
            }
+        }
+
+        post {
+            failure {
+                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
+                        to: "${EMAIL_TO}",
+                        subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            }
+            unstable {
+                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
+                        to: "${EMAIL_TO}",
+                        subject: 'Unstable build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            }
+            changed {
+                emailext body: 'Check console output at $BUILD_URL to view the results.',
+                        to: "${EMAIL_TO}",
+                        subject: 'Jenkins build is back to normal: $PROJECT_NAME - #$BUILD_NUMBER'
+            }
         }
     }
 }
