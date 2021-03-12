@@ -24,7 +24,7 @@ spring:
   datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://35.224.133.198/projeto
+    url: jdbc:postgresql://10.7.160.4:5432/projeto
     username: postgres
     password: 415782
   h2:
