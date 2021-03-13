@@ -7,10 +7,13 @@ server:
 spring:
   application:
     name: projeto-base
-  jmx:
-    enabled: false
   profiles:
-    active: prd
+    active: dev
+  # configurando o Spring Boot Admin Server
+  #boot:
+    #admin:
+      #client:
+        #url: http://localhost:8081
   #CONFIGURACAO DO BANCO POSTGRES
   jpa:
     show-sql: true
@@ -43,6 +46,28 @@ spring:
       fail-on-unknown-properties: false
     serialization:
       fail-on-empty-beans: false
+
+management:
+  security:
+    enabled: false
+  #alem do health e do info ele sempre vai export todos endpoints disponiveis
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  #indica que health deve mostrar detalhes sempre
+  endpoint:
+    health:
+      show-details: always
+# puxa informacoes do projeto do pom.xml
+info:
+  app:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    encoding: @project.build.sourceEncoding@
+    java:
+      version: @java.version@
 
 #CONFIGURA??ES DE SERVIDOR DE EMAIL
 #spring.mail.host=smtp.gmail.com
