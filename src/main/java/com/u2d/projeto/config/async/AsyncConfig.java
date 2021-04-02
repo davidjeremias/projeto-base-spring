@@ -14,10 +14,22 @@ public class AsyncConfig {
     @Bean(name = "asyncDefaultExecutor")
     public Executor asyncExecutor() {
         final ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(4);
-        executor.setMaxPoolSize(4);
-        executor.setQueueCapacity(100);
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(10);
+        executor.setQueueCapacity(1000);
+        executor.setKeepAliveSeconds(5);
         executor.setThreadNamePrefix("ThreadAppExecutor-");
+        return executor;
+    }
+
+    @Bean(name = "getCNPJExecutor")
+    public Executor getCNPJExecutor() {
+        final ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(3);
+        executor.setMaxPoolSize(3);
+        executor.setQueueCapacity(1000);
+        executor.setKeepAliveSeconds(20);
+        executor.setThreadNamePrefix("ThreadGetCNPJExecutor-");
         return executor;
     }
 }

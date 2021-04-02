@@ -1,31 +1,29 @@
 package com.u2d.projeto.service;
 
-import java.io.File;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import com.u2d.projeto.dto.EmpresaDTO;
+import com.u2d.projeto.exception.EmpresaNotFoundException;
+import com.u2d.projeto.service.validator.EmpresaValidator;
 import com.u2d.projeto.util.DateUtil;
 import com.u2d.projeto.util.RequestUtil;
 import com.u2d.projeto.util.StringUtil;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.u2d.projeto.model.Empresa;
 import com.u2d.projeto.repository.EmpresaRepository;
-import com.u2d.projeto.util.ZipArchive;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Slf4j
 public class EmpresaService {
 
 	private static final String CNPJ = "cnpj";
@@ -40,7 +38,8 @@ public class EmpresaService {
 	@Autowired
 	RestTemplate restTemplate;
 
-	private Logger logger = LoggerFactory.getLogger(EmpresaService.class);
+	@Autowired
+	private EmpresaValidator validator;
 
 	public List<Empresa> findAll() {
 		return repository.findAll();
@@ -77,16 +76,24 @@ public class EmpresaService {
 
 	public Optional<EmpresaDTO> findByCnpjReceita(Map<String, String[]> parameterMap) {
 		String cnpj = RequestUtil.extrairParametro(parameterMap, CNPJ);
-		ResponseEntity<EmpresaDTO> retorno = null;
+		validator.verificaCNPJEmpresa(cnpj);
+		return Optional.of(getEmpresaDTOResponseEntity(cnpj)).orElseThrow(EmpresaNotFoundException::new);
+	}
+
+	private Optional<EmpresaDTO> getEmpresaDTOResponseEntity(String cnpj) {
 		try {
-			retorno = restTemplate.getForEntity(RequestUtil.montaPathRequisicao(URL_RECEITA, StringUtil.removeMascara(cnpj)), EmpresaDTO.class);
+			log.info("Iniciando a pesquisa de empresa na receita com CNPJ: {}", cnpj);
+			ResponseEntity<EmpresaDTO> retorno = restTemplate.getForEntity(RequestUtil.montaPathRequisicao(URL_RECEITA, StringUtil.removeMascara(cnpj)), EmpresaDTO.class);
 			if(retorno != null & retorno.getBody() != null & retorno.getBody().getAbertura() != null){
 				retorno.getBody().setDataAbertura(DateUtil.stringFormatBrasilToLocalDate(retorno.getBody().getAbertura()));
 				retorno.getBody().setAbertura(null);
+				Thread.sleep(20000);
+				log.info("Finalizando a pesquisa de empresa");
+				return Optional.of(retorno.getBody());
 			}
-		}catch (HttpStatusCodeException e){
-			logger.error("Empresa não Localizada");
+		}catch (HttpStatusCodeException | InterruptedException ex){
+			log.error("Erro ao buscar empresa na receita", ex.getMessage(), ex);
 		}
-		return Optional.of(retorno.getBody());
+		return Optional.of(null);
 	}
 }
